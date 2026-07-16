@@ -1,0 +1,68 @@
+\documentclass[tikz,margin=3mm]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, fit, backgrounds}
+\usepackage{xcolor}
+\definecolor{primary}{HTML}{1B75BC}
+\definecolor{secondary}{HTML}{F15A29}
+\definecolor{accent}{HTML}{8CC63F}
+\definecolor{grayC}{HTML}{4D4D4D}
+\definecolor{graylight}{HTML}{F2F2F2}
+\definecolor{blueC}{HTML}{1B75BC}
+\definecolor{orangeC}{HTML}{F15A29}
+\definecolor{yellowC}{HTML}{FBB03B}
+\definecolor{purpleC}{HTML}{92278F}
+
+\tikzset{
+  base/.style={rectangle, rounded corners=4pt, draw=grayC, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, fill=white, line width=0.8pt},
+  ndBlue/.style={base, draw=blueC, fill=blueC!8, text=primary},
+  ndOrange/.style={base, draw=orangeC, fill=orangeC!8, text=primary},
+  ndGreen/.style={base, draw=accent, fill=accent!8, text=primary},
+  ndYellow/.style={base, draw=yellowC, fill=yellowC!8, text=primary},
+  ndPurple/.style={base, draw=purpleC, fill=purpleC!8, text=primary},
+  db/.style={cylinder, draw=grayC, shape border rotate=90, aspect=0.25, fill=graylight, minimum width=2.5cm, minimum height=1.5cm, align=center, font=\footnotesize, line width=0.8pt},
+  arw/.style={->, >=stealth, line width=0.8pt, draw=grayC},
+  lbl/.style={font=\scriptsize, fill=white, inner sep=2pt},
+  bxBlue/.style={rectangle, rounded corners=6pt, draw=blueC, fill=blueC!3, dashed, inner sep=15pt},
+  bxGreen/.style={rectangle, rounded corners=6pt, draw=accent, fill=accent!3, dashed, inner sep=15pt},
+  bxPurple/.style={rectangle, rounded corners=6pt, draw=purpleC, fill=purpleC!3, dashed, inner sep=15pt},
+  bxOrange/.style={rectangle, rounded corners=6pt, draw=orangeC, fill=orangeC!3, dashed, inner sep=15pt},
+  lB/.style={font=\small\bfseries, text=blueC},
+  lG/.style={font=\small\bfseries, text=accent},
+  lP/.style={font=\small\bfseries, text=purpleC},
+  lO/.style={font=\small\bfseries, text=orangeC}
+}
+
+\begin{document}
+\begin{tikzpicture}[node distance=1cm and 1.5cm]
+  % ── Client ──
+  \node[ndBlue, minimum width=3.5cm, minimum height=1.3cm] (client) {\textbf{Dashboard React}\\\footnotesize SPA (localhost:5175)};
+
+  % ── Gateway ──
+  \node[ndGreen, minimum width=3.5cm, minimum height=1.3cm, below=1.5cm of client] (gw) {\textbf{API Gateway}\\\footnotesize localhost:8000};
+
+  % ── Services ──
+  \node[ndPurple, minimum width=2.8cm, below left=2cm and 3cm of gw] (ref) {\textbf{Referential}\\\footnotesize :8001};
+  \node[ndPurple, minimum width=2.8cm, below left=2cm and 0cm of gw] (gen) {\textbf{Generator}\\\footnotesize :8002};
+  \node[ndPurple, minimum width=2.8cm, below right=2cm and 0cm of gw] (run) {\textbf{Runner}\\\footnotesize :8003};
+  \node[ndPurple, minimum width=2.8cm, below right=2cm and 3cm of gw] (conn) {\textbf{Connect}\\\footnotesize :8004};
+
+  % ── Storage ──
+  \node[ndGray, minimum width=3cm, below=2cm of $(gen)!0.5!(run)$] (storage) {\textbf{Stockage Partagé}\\\footnotesize cypress/ (R/W)};
+
+  % ── External ──
+  \node[ndOrange, minimum width=3cm, below=1.5cm of conn] (pwc) {\textbf{PowerCard API}\\\footnotesize Connect + App};
+
+  % ── Arrows ──
+  \draw[arw] (client) -- node[lbl]{Vite Proxy} (gw);
+  \draw[arw] (gw) -- node[lbl, left]{\footnotesize /api/referenciel} (ref);
+  \draw[arw] (gw) -- node[lbl, left]{\footnotesize /api/export} (gen);
+  \draw[arw] (gw) -- node[lbl, right]{\footnotesize /api/run (SSE)} (run);
+  \draw[arw] (gw) -- node[lbl, right]{\footnotesize /api/connect} (conn);
+  \draw[arw] (ref) -- (storage);
+  \draw[arw] (gen) -- (storage);
+  \draw[arw] (run) -- (storage);
+  \draw[arw] (conn) -- node[lbl]{JWT Auth} (pwc);
+\end{tikzpicture}
+\end{document}

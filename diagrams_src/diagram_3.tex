@@ -1,0 +1,77 @@
+\documentclass[tikz,margin=3mm]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, fit, backgrounds}
+\usepackage{xcolor}
+\definecolor{primary}{HTML}{1B75BC}
+\definecolor{secondary}{HTML}{F15A29}
+\definecolor{accent}{HTML}{8CC63F}
+\definecolor{grayC}{HTML}{4D4D4D}
+\definecolor{graylight}{HTML}{F2F2F2}
+\definecolor{blueC}{HTML}{1B75BC}
+\definecolor{orangeC}{HTML}{F15A29}
+\definecolor{yellowC}{HTML}{FBB03B}
+\definecolor{purpleC}{HTML}{92278F}
+
+\tikzset{
+  base/.style={rectangle, rounded corners=4pt, draw=grayC, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, fill=white, line width=0.8pt},
+  ndBlue/.style={base, draw=blueC, fill=blueC!8, text=primary},
+  ndOrange/.style={base, draw=orangeC, fill=orangeC!8, text=primary},
+  ndGreen/.style={base, draw=accent, fill=accent!8, text=primary},
+  ndYellow/.style={base, draw=yellowC, fill=yellowC!8, text=primary},
+  ndPurple/.style={base, draw=purpleC, fill=purpleC!8, text=primary},
+  db/.style={cylinder, draw=grayC, shape border rotate=90, aspect=0.25, fill=graylight, minimum width=2.5cm, minimum height=1.5cm, align=center, font=\footnotesize, line width=0.8pt},
+  arw/.style={->, >=stealth, line width=0.8pt, draw=grayC},
+  lbl/.style={font=\scriptsize, fill=white, inner sep=2pt},
+  bxBlue/.style={rectangle, rounded corners=6pt, draw=blueC, fill=blueC!3, dashed, inner sep=15pt},
+  bxGreen/.style={rectangle, rounded corners=6pt, draw=accent, fill=accent!3, dashed, inner sep=15pt},
+  bxPurple/.style={rectangle, rounded corners=6pt, draw=purpleC, fill=purpleC!3, dashed, inner sep=15pt},
+  bxOrange/.style={rectangle, rounded corners=6pt, draw=orangeC, fill=orangeC!3, dashed, inner sep=15pt},
+  lB/.style={font=\small\bfseries, text=blueC},
+  lG/.style={font=\small\bfseries, text=accent},
+  lP/.style={font=\small\bfseries, text=purpleC},
+  lO/.style={font=\small\bfseries, text=orangeC}
+}
+
+\begin{document}
+\begin{tikzpicture}
+  % ── Lifelines ──
+  \node[ndBlue, minimum width=2.2cm] (user) {\textbf{Testeur QA}};
+  \node[ndGreen, minimum width=2.2cm, right=2.5cm of user] (dash) {\textbf{Dashboard}};
+  \node[ndPurple, minimum width=2.2cm, right=2.5cm of dash] (api) {\textbf{API Server}};
+  \node[ndOrange, minimum width=2.2cm, right=2.5cm of api] (connect) {\textbf{Connect API}};
+  \node[ndGreenC, minimum width=2.2cm, right=2.5cm of connect] (fs) {\textbf{File System}};
+
+  % ── Lifeline bars ──
+  \foreach \n in {user,dash,api,connect,fs}
+    \draw[dashed, gray!50] (\n.south) -- ++(0,-14);
+
+  % ── Phase 1: Sélection ──
+  \node[snote, below=0.8cm of dash] (p1) {\textbf{Phase 1: Sélection}};
+  \draw[arw, blueC] ([yshift=-1.5cm]user.south) -- node[lbl, above]{1. Sélectionner écran} ([yshift=-1.5cm]dash.south);
+  \draw[arw, accent] ([yshift=-2.2cm]dash.south) -- node[lbl, above]{2. Charger template} ([yshift=-2.2cm]api.south);
+  \draw[arw, accent, dashed] ([yshift=-2.8cm]api.south) -- node[lbl, above]{3. template + cas prédéfinis} ([yshift=-2.8cm]dash.south);
+
+  % ── Phase 2: Auto-Fill ──
+  \node[snote, below=4cm of dash] (p2) {\textbf{Phase 2: Auto-Fill}};
+  \draw[arw, blueC] ([yshift=-4.5cm]user.south) -- node[lbl, above]{4. Clic Auto-Fill} ([yshift=-4.5cm]dash.south);
+  \draw[arw, accent] ([yshift=-5.2cm]dash.south) -- node[lbl, above]{5. GET /api/connect/random-test-card} ([yshift=-5.2cm]api.south);
+  \draw[arw, orangeC] ([yshift=-5.8cm]api.south) -- node[lbl, above]{6. Auth JWT + search\_card} ([yshift=-5.8cm]connect.south);
+  \draw[arw, orangeC, dashed] ([yshift=-6.4cm]connect.south) -- node[lbl, above]{7. cardNumber, expDate} ([yshift=-6.4cm]api.south);
+  \draw[arw, accent, dashed] ([yshift=-7cm]api.south) -- node[lbl, above]{8. données carte} ([yshift=-7cm]dash.south);
+
+  % ── Phase 3: Génération ──
+  \node[snote, below=8cm of dash] (p3) {\textbf{Phase 3: Génération}};
+  \draw[arw, blueC] ([yshift=-8.5cm]user.south) -- node[lbl, above]{9. Clic Générer} ([yshift=-8.5cm]dash.south);
+  \draw[arw, accent, dotted] ([yshift=-9.2cm]dash.south) -- ++(0,-0.5) node[lbl, right]{\footnotesize buildPayload() + patchSpec()};
+
+  % ── Phase 4: Export ──
+  \node[snote, below=10.5cm of dash] (p4) {\textbf{Phase 4: Export}};
+  \draw[arw, blueC] ([yshift=-11cm]user.south) -- node[lbl, above]{10. Clic Exporter} ([yshift=-11cm]dash.south);
+  \draw[arw, accent] ([yshift=-11.7cm]dash.south) -- node[lbl, above]{11. POST /api/export-to-project} ([yshift=-11.7cm]api.south);
+  \draw[arw, greenC] ([yshift=-12.3cm]api.south) -- node[lbl, above]{12. writeFileSync()} ([yshift=-12.3cm]fs.south);
+  \draw[arw, greenC, dashed] ([yshift=-12.9cm]fs.south) -- node[lbl, above]{13. OK} ([yshift=-12.9cm]api.south);
+  \draw[arw, accent, dashed] ([yshift=-13.5cm]api.south) -- node[lbl, above]{14. success} ([yshift=-13.5cm]dash.south);
+\end{tikzpicture}
+\end{document}

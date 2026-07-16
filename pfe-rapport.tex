@@ -158,26 +158,47 @@
 % ── Hyperref ──
 \hypersetup{colorlinks=true, linkcolor=linkcolor, urlcolor=linkcolor, citecolor=linkcolor}
 
+% ── Setup Marks for Chapter ──
+\makeatletter
+\renewcommand{\chaptermark}[1]{\markboth{Chapitre \thechapter. #1}{}}
+\makeatother
+
 % ── Headers/Footers ──
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{} % Image missing: \includegraphics[width=4.5cm,keepaspectratio]{emsi-6.png}
-\fancyhead[R]{\includegraphics[height=1cm,keepaspectratio]{page00_img01.jpeg}}
-\renewcommand{\headrulewidth}{0.5pt}
-\fancyfoot[R]{Page \thepage\ sur \pageref{LastPage}}
+\fancyhead[C]{\textbf{\leftmark}}
+\fancyfoot[L]{\textbf{HPS}}
+\fancyfoot[C]{\textbf{\thepage}}
+\fancyfoot[R]{\textbf{Année universitaire 2025--2026}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+% Redéfinir le style 'plain' (utilisé par défaut sur les pages de chapitres) pour avoir le même header/footer
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[C]{\textbf{\leftmark}}
+  \fancyfoot[L]{\textbf{HPS}}
+  \fancyfoot[C]{\textbf{\thepage}}
+  \fancyfoot[R]{\textbf{Année universitaire 2025--2026}}
+  \renewcommand{\headrulewidth}{1pt}
+  \renewcommand{\footrulewidth}{1pt}
+}
 
 % ── Chapter/Section styling ──
+\definecolor{mygreen}{HTML}{1A8438}
 \titleformat{\chapter}[display]
-  {\raggedright\color{chaptercolor}\fontsize{18}{22}\bfseries\selectfont}
-  {Chapitre \thechapter\ :}
-  {1ex}
-  {}
+  {\vspace*{\fill}\centering\color{black}\Huge\bfseries}
+  {\textcolor{mygreen}{\rule{\textwidth}{1.5pt}}\vspace{10pt}\\ \textbf{Chapitre \thechapter\ :}}
+  {10pt}
+  {\Huge}[\vspace{10pt}\textcolor{mygreen}{\rule{\textwidth}{1.5pt}}\vspace*{\fill}\newpage]
+
 \titleformat{name=\chapter,numberless}[display]
-  {}
+  {\vspace*{\fill}\centering\color{black}\Huge\bfseries}
   {}
   {0pt}
-  {\centering\color{chaptercolor}\fontsize{24}{28}\bfseries\selectfont}
-\titlespacing*{\chapter}{0pt}{-30pt}{20pt}
+  {\textcolor{mygreen}{\rule{\textwidth}{1.5pt}}\vspace{10pt}\\ \Huge}[\vspace{10pt}\textcolor{mygreen}{\rule{\textwidth}{1.5pt}}\vspace*{\fill}\newpage]
+
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
 
 \titleformat{\section}
   {\fontsize{18}{22}\bfseries\color{sectioncolor}\raggedright}
@@ -219,7 +240,7 @@
 % DOCUMENT
 % ══════════════════════════════════════════════════════════════════
 \begin{document}
-\pagenumbering{roman}
+\pagenumbering{arabic}
 \dominitoc
 \nomtcrule
 

@@ -1,0 +1,88 @@
+\documentclass[tikz,margin=3mm]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, fit, backgrounds}
+\usepackage{xcolor}
+\definecolor{primary}{HTML}{1B75BC}
+\definecolor{secondary}{HTML}{F15A29}
+\definecolor{accent}{HTML}{8CC63F}
+\definecolor{grayC}{HTML}{4D4D4D}
+\definecolor{graylight}{HTML}{F2F2F2}
+\definecolor{blueC}{HTML}{1B75BC}
+\definecolor{orangeC}{HTML}{F15A29}
+\definecolor{yellowC}{HTML}{FBB03B}
+\definecolor{purpleC}{HTML}{92278F}
+
+\tikzset{
+  base/.style={rectangle, rounded corners=4pt, draw=grayC, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, fill=white, line width=0.8pt},
+  ndBlue/.style={base, draw=blueC, fill=blueC!8, text=primary},
+  ndOrange/.style={base, draw=orangeC, fill=orangeC!8, text=primary},
+  ndGreen/.style={base, draw=accent, fill=accent!8, text=primary},
+  ndYellow/.style={base, draw=yellowC, fill=yellowC!8, text=primary},
+  ndPurple/.style={base, draw=purpleC, fill=purpleC!8, text=primary},
+  db/.style={cylinder, draw=grayC, shape border rotate=90, aspect=0.25, fill=graylight, minimum width=2.5cm, minimum height=1.5cm, align=center, font=\footnotesize, line width=0.8pt},
+  arw/.style={->, >=stealth, line width=0.8pt, draw=grayC},
+  lbl/.style={font=\scriptsize, fill=white, inner sep=2pt},
+  bxBlue/.style={rectangle, rounded corners=6pt, draw=blueC, fill=blueC!3, dashed, inner sep=15pt},
+  bxGreen/.style={rectangle, rounded corners=6pt, draw=accent, fill=accent!3, dashed, inner sep=15pt},
+  bxPurple/.style={rectangle, rounded corners=6pt, draw=purpleC, fill=purpleC!3, dashed, inner sep=15pt},
+  bxOrange/.style={rectangle, rounded corners=6pt, draw=orangeC, fill=orangeC!3, dashed, inner sep=15pt},
+  lB/.style={font=\small\bfseries, text=blueC},
+  lG/.style={font=\small\bfseries, text=accent},
+  lP/.style={font=\small\bfseries, text=purpleC},
+  lO/.style={font=\small\bfseries, text=orangeC}
+}
+
+\begin{document}
+\begin{tikzpicture}[node distance=0.6cm and 1cm]
+  % ── Entry Point ──
+  \node[ndGray, minimum width=2.5cm] (html) {index.html};
+  \node[ndGray, minimum width=2.5cm, right=0.5cm of html] (main) {main.jsx};
+  \node[ndBlue, minimum width=3cm, minimum height=1.2cm, right=0.5cm of main] (app) {\textbf{App.jsx}\\\footnotesize 1585 lignes};
+
+  \begin{scope}[on background layer]
+    \node[bxGray, fit=(html)(main)(app), label={[lGr]above:Point d'Entrée}] {};
+  \end{scope}
+
+  % ── Data Layer ──
+  \node[ndGreen, minimum width=2.5cm, below=2.5cm of html] (screens) {screens.js};
+  \node[ndGreen, minimum width=2.8cm, right=0.5cm of screens] (templates) {formTemplates.js\\\footnotesize 15 templates};
+  \node[ndGreen, minimum width=3cm, right=0.5cm of templates] (catalog) {projectCatalog.json\\\footnotesize 32 écrans};
+  \node[ndGreen, minimum width=3cm, right=0.5cm of catalog] (gentemp) {generatedForm\\Templates.json};
+
+  \begin{scope}[on background layer]
+    \node[bxGreen, fit=(screens)(templates)(catalog)(gentemp), label={[lG]above:Couche Données}] {};
+  \end{scope}
+
+  % ── Services Layer ──
+  \node[ndPurple, minimum width=3cm, below=2.5cm of screens] (connectsvc) {connectApi.js};
+  \node[ndPurple, minimum width=3cm, right=0.5cm of connectsvc] (mistral) {mistralApi.js\\\footnotesize AI Gen};
+  \node[ndPurple, minimum width=3cm, right=0.5cm of mistral] (aidiscovery) {aiDiscovery.js\\\footnotesize AI Crawl};
+
+  \begin{scope}[on background layer]
+    \node[bxPurple, fit=(connectsvc)(mistral)(aidiscovery), label={[lP]above:Couche Services}] {};
+  \end{scope}
+
+  % ── Server Layer ──
+  \node[ndOrange, minimum width=3.5cm, below=2.5cm of connectsvc] (exportapi) {exportApi.js\\\footnotesize 5 endpoints};
+  \node[ndOrange, minimum width=3.5cm, right=0.8cm of exportapi] (catalogmjs) {catalog.mjs\\\footnotesize 583 lignes};
+  \node[ndOrange, minimum width=3.5cm, right=0.8cm of catalogmjs] (viteconf) {vite.config.js};
+
+  \begin{scope}[on background layer]
+    \node[bxOrange, fit=(exportapi)(catalogmjs)(viteconf), label={[lO]above:Couche Serveur (Build + API)}] {};
+  \end{scope}
+
+  % ── Arrows ──
+  \draw[arw] (html) -- (main);
+  \draw[arw] (main) -- (app);
+  \draw[arw] (app) -- (screens);
+  \draw[arw] (app) -- (templates);
+  \draw[arw] (app) -- (catalog);
+  \draw[arw] (app) -- (connectsvc);
+  \draw[arw] (app) -- (mistral);
+  \draw[arw] (catalogmjs) -- (catalog);
+  \draw[arw] (catalogmjs) -- (gentemp);
+  \draw[arw] (viteconf) -- (exportapi);
+\end{tikzpicture}
+\end{document}
