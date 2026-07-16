@@ -1,0 +1,121 @@
+% ══════════════════════════════════════════════════════════════════
+% CHAPITRE V — Les apports du projet
+% ══════════════════════════════════════════════════════════════════
+\newpage
+\chapter{Les apports du projet}
+\vspace{1cm}
+\minitoc
+\newpage
+
+\textbf{Introduction}
+
+L'évaluation d'un stage de fin d'études ne se limite pas à la simple énumération des tâches techniques accomplies ; elle réside également dans l'analyse de la valeur ajoutée apportée à l'entreprise et des bénéfices tirés par le stagiaire. Ce cinquième et dernier chapitre propose une réflexion rétrospective sur l'ensemble de l'expérience vécue au sein d'HPS. Nous aborderons d'abord l'impact du projet d'automatisation sur l'efficacité opérationnelle des équipes de test, avant de dresser un bilan des compétences techniques, méthodologiques et comportementales acquises tout au long de cette période d'immersion professionnelle.
+\vspace{10pt}
+
+Durant les six mois de stage que j'ai passé à la société HPS, j'ai pu contribuer efficacement au processus de tests dans un des produits PowerCARD. Les tests que j'ai menés avec mon équipe ont permis de vérifier le fonctionnement du produit.
+
+L'équipe au sein de laquelle j'ai travaillé a l'expérience et le savoir-faire nécessaires pour produire la meilleure qualité possible, garantir que le produit ne présent pas de bogues ou d'erreurs, et par conséquent, satisfaire les besoins de la clientèle.
+
+Grâce aux preuves tangibles des tests, l'entreprise a pu collecter des domaines pour les améliorations possibles nécessaires pour le développement de son produit. Le produit que doit livrer au client permettra sûrement à la société de se faire une image de marque, chose indispensable pour son développement et sa croissance.
+
+\section{Bénéfices du Dashboard pour l'entreprise}
+
+Le développement du QA Cypress Generator Dashboard a apporté des bénéfices concrets et mesurables à l'équipe QA d'HPS :
+
+\begin{table}[H]
+\centering
+\caption{Comparaison avant/après l'automatisation}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+\textbf{Critère} & \textbf{Avant (Manuel)} & \textbf{Après (Dashboard)} \\
+\midrule
+\rowcolor{primary!5} Temps de création d'un test & 30--60 min (écriture code) & 3--5 min (formulaire) \\
+Compétences requises & JavaScript avancé, Cypress API & Aucune compétence code \\
+\rowcolor{primary!5} Risque d'erreurs & Élevé (typos sélecteurs) & Faible (auto-génération) \\
+Couverture des écrans & Limitée (écrans connus) & 32 écrans catalogués \\
+\rowcolor{primary!5} Données de test & Manuelles (copier/coller) & Auto-Fill via API Connect \\
+Exécution des tests & Terminal séparé & Intégrée dans le Dashboard \\
+\rowcolor{primary!5} Rapport de résultats & Logs bruts Cypress & Rapport visuel temps réel \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Gains quantitatifs}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Réduction du temps de 85\%} : La génération automatique des scripts réduit le temps de création d'un scénario de test de 45 minutes en moyenne à moins de 5 minutes.
+\item \textbf{32 écrans catalogués automatiquement} : Le scanner de catalogue détecte et indexe les specs existantes sans intervention manuelle.
+\item \textbf{5 endpoints API} : L'architecture microservices expose 5 endpoints REST/SSE couvrant l'ensemble du cycle de vie du test.
+\item \textbf{Zéro ligne de code requise} : Les testeurs fonctionnels peuvent générer des tests complets via l'interface graphique.
+\end{itemize}
+
+\subsection{Gains qualitatifs}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Démocratisation de l'automatisation} : Les testeurs non-développeurs peuvent désormais participer à l'effort d'automatisation.
+\item \textbf{Standardisation des scripts} : Tous les tests générés suivent la même structure et les mêmes conventions.
+\item \textbf{Traçabilité} : Chaque test généré est lié à un écran PowerCARD identifié dans le catalogue.
+\item \textbf{Intégrité des données} : L'auto-remplissage via l'API Connect garantit l'utilisation de données de test valides.
+\end{itemize}
+
+\section{Apport de l'Intelligence Artificielle}
+
+L'intégration de Mistral AI dans le Dashboard a ouvert de nouvelles perspectives :
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Découverte automatique d'écrans} : Le crawler Cypress parcourt les modules PowerCARD et extrait les schémas d'écrans bruts. Mistral AI analyse ces schémas pour les classifier (module, workspace), générer des labels lisibles, et suggérer les meilleures stratégies de sélection pour chaque champ.
+\item \textbf{Génération de tests par IA} : Le service \texttt{generator-service} utilise Mistral pour produire des scripts Cypress complets à partir de descriptions fonctionnelles.
+\item \textbf{Enrichissement du catalogue} : L'IA comble les lacunes des templates manuels en inférant automatiquement les types de champs et les valeurs de test suggérées.
+\end{itemize}
+
+\section{Apport de n8n}
+
+L'intégration de n8n comme outil d'orchestration a permis :
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Automatisation de la préparation des données} : Les workflows n8n récupèrent automatiquement les cartes de test via l'API Connect et les stockent dans la base SQLite.
+\item \textbf{Archivage automatique} : Les résultats de tests sont archivés dans la base de données pour suivi historique.
+\item \textbf{Orchestration sans code} : Les testeurs peuvent créer des workflows complexes de préparation de données via l'interface visuelle de n8n.
+\end{itemize}
+
+\section{Apports personnels}
+
+Grace à ce stage, j'ai pu réaliser, au sein de mon équipe, différentes tâches dans le processus de test. Ceci m'a permis d'améliorer davantage mes compétences techniques, professionnelles et humaines.
+
+Ce projet, très riches en enseignements, m'a confirmé l'importance du test dans les projets de développement logiciel. Ce qui m'a incité à persévérer et s'impliquer davantage dans ce métier.
+
+\subsection{En termes de compétences techniques}
+
+\begin{itemize}[leftmargin=*]
+\item Maîtrise du framework Cypress pour l'automatisation de tests E2E,
+\item Développement full-stack avec React, Node.js et Vite,
+\item Architecture microservices et containerisation Docker,
+\item Intégration d'APIs d'intelligence artificielle (Mistral AI),
+\item Mise en place de workflows d'automatisation avec n8n,
+\item Gestion de bases de données SQLite,
+\item Utilisation de Server-Sent Events (SSE) pour le streaming temps réel.
+\end{itemize}
+
+\subsection{En termes de travail en équipe}
+
+Le projet m'a permis de développer diverses capacités, entre autres :
+\begin{itemize}[leftmargin=*]
+\item La communication entre équipes ou membres d'une même équipe, en temps réel,
+\item La coordination avec les autres équipes pour le lancement des scripts d'automatisation,
+\item L'adaptation aux méthodes de travail des parties prenantes du projet.
+\end{itemize}
+
+\subsection{En termes de travail sur le terrain}
+
+Ceci, qui est nouveau pour moi, m'a apporté :
+\begin{itemize}[leftmargin=*]
+\item Une certaine maturité quasi-immédiate, qui m'a permis de comprendre comment cibler les problèmes prioritaires,
+\item L'aptitude à améliorer mon autonomie vis-à-vis de la prise de décision,
+\item L'importance de la rigueur, du respect des engagements, des délais.
+\end{itemize}
+
+\vspace{10pt}
+\textbf{Conclusion}
+
+L'ensemble de ces apports témoigne de l'impact positif de cette expérience sur mon profil d'ingénieur. Ce projet m'a permis non seulement de valider mes compétences techniques, mais également d'acquérir une posture professionnelle solide et de comprendre les enjeux réels de la qualité logicielle en entreprise. L'intégration de technologies de pointe comme l'intelligence artificielle et l'orchestration de workflows positionne ce projet comme une contribution significative à la modernisation des processus QA chez HPS.

@@ -1,0 +1,253 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=2.5cm, headheight=1.5cm}
+\usepackage{eurosym}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{mathptmx}
+\usepackage{minitoc}
+\usepackage{listings}
+\lstset{
+  literate={é}{{\\'e}}1 {è}{{\`e}}1 {à}{{\`a}}1 {ç}{{\c{c}}}1 {É}{{\\'E}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {ô}{{\^o}}1 {œ}{{\oe}}1 {°}{{\textdegree}}1 {'}{{'}}1 {«}{{\guillemotleft}}1 {»}{{\guillemotright}}1
+}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\usepackage{lastpage}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds, calc, matrix}
+\newcolumntype{R}{>{\raggedright\arraybackslash}X}
+\sloppy
+
+% ── Graphics path ──
+\graphicspath{{pdf_images/}{report-images/}{screenshots/}}
+
+% ── QA Report Colors ──
+\definecolor{primary}{HTML}{1e293b}
+\definecolor{secondary}{HTML}{E94560}
+\definecolor{success}{HTML}{2E7D32}
+\definecolor{successbg}{HTML}{4CAF50}
+\definecolor{warning}{HTML}{F57C00}
+\definecolor{warningbg}{HTML}{F59E0B}
+\definecolor{danger}{HTML}{D32F2F}
+\definecolor{dangerbg}{HTML}{DC2626}
+\definecolor{codebg}{HTML}{1E1E2E}
+\definecolor{codefg}{HTML}{CDD6F4}
+\definecolor{linkblue}{HTML}{1565C0}
+\definecolor{expectedbg}{HTML}{E6F9ED}
+\definecolor{actualbg}{HTML}{FEF2F2}
+\definecolor{expectedhdr}{HTML}{238636}
+
+% ── Dashboard Diagram Colors ──
+\definecolor{accent}{HTML}{0d9668}
+\definecolor{blueC}{HTML}{2563eb}
+\definecolor{purpleC}{HTML}{7c3aed}
+\definecolor{orangeC}{HTML}{ea580c}
+\definecolor{pinkC}{HTML}{db2777}
+\definecolor{greenC}{HTML}{16a34a}
+\definecolor{grayC}{HTML}{64748b}
+\definecolor{graylight}{HTML}{f1f5f9}
+\definecolor{bgcode}{HTML}{f8fafc}
+\definecolor{yellowC}{HTML}{ca8a04}
+
+% ── TikZ Styles ──
+\tikzset{
+    ndGreen/.style={rectangle, rounded corners=4pt, draw=accent, fill=accent!8, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    ndBlue/.style={rectangle, rounded corners=4pt, draw=blueC, fill=blueC!8, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    ndPurple/.style={rectangle, rounded corners=4pt, draw=purpleC, fill=purpleC!8, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    ndOrange/.style={rectangle, rounded corners=4pt, draw=orangeC, fill=orangeC!8, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    ndPink/.style={rectangle, rounded corners=4pt, draw=pinkC, fill=pinkC!8, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    ndGreenC/.style={rectangle, rounded corners=4pt, draw=greenC, fill=greenC!8, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    ndGray/.style={rectangle, rounded corners=4pt, draw=grayC, fill=grayC!8, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    ndGrayS/.style={rectangle, rounded corners=4pt, draw=grayC, fill=grayC!8, minimum width=2.2cm, minimum height=0.9cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    ndYellow/.style={rectangle, rounded corners=4pt, draw=yellowC, fill=yellowC!8, minimum width=3.5cm, minimum height=1cm, align=center, font=\footnotesize, text=primary, line width=0.8pt},
+    bxGreen/.style={rectangle, rounded corners=6pt, draw=accent, fill=accent!4, inner sep=10pt, line width=1.2pt},
+    bxBlue/.style={rectangle, rounded corners=6pt, draw=blueC, fill=blueC!4, inner sep=10pt, line width=1.2pt},
+    bxPurple/.style={rectangle, rounded corners=6pt, draw=purpleC, fill=purpleC!4, inner sep=10pt, line width=1.2pt},
+    bxOrange/.style={rectangle, rounded corners=6pt, draw=orangeC, fill=orangeC!4, inner sep=10pt, line width=1.2pt},
+    bxPink/.style={rectangle, rounded corners=6pt, draw=pinkC, fill=pinkC!4, inner sep=10pt, line width=1.2pt},
+    bxGreenC/.style={rectangle, rounded corners=6pt, draw=greenC, fill=greenC!4, inner sep=10pt, line width=1.2pt},
+    bxGray/.style={rectangle, rounded corners=6pt, draw=grayC, fill=grayC!4, inner sep=10pt, line width=1.2pt},
+    bxYellow/.style={rectangle, rounded corners=6pt, draw=yellowC, fill=yellowC!4, inner sep=10pt, line width=1.2pt},
+    lG/.style={font=\small\bfseries, text=accent},
+    lB/.style={font=\small\bfseries, text=blueC},
+    lP/.style={font=\small\bfseries, text=purpleC},
+    lO/.style={font=\small\bfseries, text=orangeC},
+    lPk/.style={font=\small\bfseries, text=pinkC},
+    lGC/.style={font=\small\bfseries, text=greenC},
+    lGr/.style={font=\small\bfseries, text=grayC},
+    lY/.style={font=\small\bfseries, text=yellowC},
+    arw/.style={-{Stealth[length=5pt]}, line width=0.8pt, color=primary},
+    lbl/.style={font=\tiny, text=primary, fill=white, inner sep=1pt},
+    darw/.style={-{Stealth[length=5pt]}, dashed, line width=0.8pt, color=primary},
+    ucG/.style={ellipse, draw=accent, fill=accent!8, minimum width=3.2cm, minimum height=0.7cm, align=center, font=\tiny, text=primary, line width=0.6pt},
+    ucB/.style={ellipse, draw=blueC, fill=blueC!8, minimum width=3.2cm, minimum height=0.7cm, align=center, font=\tiny, text=primary, line width=0.6pt},
+    actG/.style={circle, draw=accent, fill=accent!10, minimum size=0.9cm, font=\tiny\bfseries, text=primary, line width=0.8pt, align=center},
+    actB/.style={circle, draw=blueC, fill=blueC!10, minimum size=0.9cm, font=\tiny\bfseries, text=primary, line width=0.8pt, align=center},
+    actP/.style={circle, draw=purpleC, fill=purpleC!10, minimum size=0.9cm, font=\tiny\bfseries, text=primary, line width=0.8pt, align=center},
+    cls/.style={rectangle, rounded corners=2pt, draw=blueC, fill=blueC!5, text width=5cm, align=left, font=\tiny, line width=0.8pt},
+    spG/.style={rectangle, rounded corners=3pt, draw=accent, fill=accent!10, minimum width=2cm, minimum height=0.6cm, font=\tiny\bfseries, text=primary, line width=0.8pt, align=center},
+    spB/.style={rectangle, rounded corners=3pt, draw=blueC, fill=blueC!10, minimum width=2cm, minimum height=0.6cm, font=\tiny\bfseries, text=primary, line width=0.8pt, align=center},
+    spP/.style={rectangle, rounded corners=3pt, draw=purpleC, fill=purpleC!10, minimum width=2cm, minimum height=0.6cm, font=\tiny\bfseries, text=primary, line width=0.8pt, align=center},
+    spO/.style={rectangle, rounded corners=3pt, draw=orangeC, fill=orangeC!10, minimum width=2cm, minimum height=0.6cm, font=\tiny\bfseries, text=primary, line width=0.8pt, align=center},
+    spGr/.style={rectangle, rounded corners=3pt, draw=grayC, fill=grayC!10, minimum width=2cm, minimum height=0.6cm, font=\tiny\bfseries, text=primary, line width=0.8pt, align=center},
+    snote/.style={rectangle, rounded corners=2pt, draw=grayC!40, fill=graylight, font=\tiny\bfseries, text=primary, align=center, inner sep=3pt},
+}
+
+% ── Code listings ──
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small\color{codefg},
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{gray!30},
+    showstringspaces=false
+}
+
+% ── QA Report macros ──
+\newcommand{\twoimages}[4]{%
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{#1}
+        \caption{#2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{#3}
+        \caption{#4}
+    \end{subfigure}
+\end{figure}
+}
+
+\newcommand{\bugtable}[2]{%
+\begin{center}
+\begin{tabular}{|p{0.47\textwidth}|p{0.47\textwidth}|}
+\hline
+\cellcolor{expectedhdr}\textcolor{white}{\textbf{Expected}} & \cellcolor{dangerbg}\textcolor{white}{\textbf{Obtained}} \\
+\hline
+\cellcolor{expectedbg} #1 & \cellcolor{actualbg} #2 \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+% ── Colors ──
+\definecolor{chaptercolor}{HTML}{1B75BC}
+\definecolor{sectioncolor}{HTML}{1B75BC}
+\definecolor{captioncolor}{HTML}{1B75BC}
+\definecolor{linkcolor}{HTML}{1B75BC}
+\definecolor{rulecolor}{HTML}{C0C0C0}
+
+% ── Hyperref ──
+\hypersetup{colorlinks=true, linkcolor=linkcolor, urlcolor=linkcolor, citecolor=linkcolor}
+
+% ── Headers/Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[width=4.5cm,keepaspectratio]{emsi-6.png}}
+\fancyhead[R]{\includegraphics[height=1cm,keepaspectratio]{page00_img01.jpeg}}
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyfoot[R]{Page \thepage\ sur \pageref{LastPage}}
+
+% ── Chapter/Section styling ──
+\titleformat{\chapter}[display]
+  {\raggedright\color{chaptercolor}\fontsize{18}{22}\bfseries\selectfont}
+  {Chapitre \thechapter\ :}
+  {1ex}
+  {}
+\titleformat{name=\chapter,numberless}[display]
+  {}
+  {}
+  {0pt}
+  {\centering\color{chaptercolor}\fontsize{24}{28}\bfseries\selectfont}
+\titlespacing*{\chapter}{0pt}{-30pt}{20pt}
+
+\titleformat{\section}
+  {\fontsize{18}{22}\bfseries\color{sectioncolor}\raggedright}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{sectioncolor}\raggedright}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\color{sectioncolor}\raggedright}
+  {\thesubsubsection}{1em}{}
+
+% ── Caption styling ──
+\captionsetup{labelsep=colon, labelfont={bf,color=captioncolor}, textfont={color=captioncolor}, justification=centering}
+
+% ── Custom frontmatter commands ──
+\newcommand{\frontmattertitle}[1]{%
+  \vspace*{1cm}
+  \begin{center}
+    \fontsize{24}{28}\bfseries\selectfont #1
+  \end{center}
+  \vspace{1.5cm}
+}
+
+% ── Custom chapter header bar ──
+\newcommand{\chapterbar}[1]{%
+  \noindent\makebox[\textwidth]{\textcolor{rulecolor}{\rule{\textwidth}{1pt}}}\\[2pt]
+  \centering{\color{chaptercolor}\fontsize{18}{22}\bfseries\selectfont #1}\\[2pt]
+  \noindent\makebox[\textwidth]{\textcolor{rulecolor}{\rule{\textwidth}{1pt}}}
+  \vspace{10pt}
+}
+
+% ── Reduce spacing ──
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\setstretch{1.5}
+
+% ══════════════════════════════════════════════════════════════════
+% DOCUMENT
+% ══════════════════════════════════════════════════════════════════
+\begin{document}
+\pagenumbering{roman}
+\dominitoc
+\nomtcrule
+
+% ── Frontmatter: Cover, Dédicace, Remerciements, Abstract, Résumé, Glossaire, ToC ──
+\input{chapters/frontmatter}
+
+% ── Introduction Générale ──
+\input{chapters/introduction}
+
+% ── Chapitre I: Présentation de l'organisme d'accueil ──
+\input{chapters/chapitre1}
+
+% ── Chapitre II: Contexte et problématique ──
+\input{chapters/chapitre2}
+
+% ── Chapitre III: Méthodologies et outils ──
+\input{chapters/chapitre3}
+
+% ── Chapitre IV: Travaux réalisés ──
+\input{chapters/chapitre4}
+
+% ── Chapitre V: Les apports du projet ──
+\input{chapters/chapitre5}
+
+% ── Conclusion Générale et Perspectives ──
+\input{chapters/conclusion}
+
+% ── Références ──
+\input{chapters/references}
+
+\end{document}

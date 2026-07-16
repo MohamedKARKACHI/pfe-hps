@@ -1,0 +1,135 @@
+% ══════════════════════════════════════════════════════════════════
+% CHAPITRE II — Contexte et problématique
+% ══════════════════════════════════════════════════════════════════
+\newpage
+\chapter{Contexte et problématique}
+\vspace{1cm}
+\minitoc
+\newpage
+
+\textit{La présentation et la gestion du projet revêt un caractère important pour la suite du rapport. La description du contexte, de la problématique, des missions et de la gestion du projet nous permet de mieux comprendre sa réalisation et sa concrétisation.}
+
+\vspace{10pt}
+\textbf{Introduction}
+
+La complexité croissante des solutions monétiques comme PowerCARD nécessite une gestion de projet rigoureuse et des processus de validation infaillibles. Dans un contexte multi-clients où les mêmes modules logiciels sont déployés avec des paramétrages spécifiques, le risque de régression lors des mises à jour est élevé. Ce chapitre présente le contexte spécifique du projet de stage, en détaillant la problématique liée aux tests manuels répétitifs, les objectifs fixés pour l'automatisation des processus de validation, ainsi que la planification et la gestion du projet adoptées pour mener à bien cette mission.
+\vspace{10pt}
+
+L'usage de l'informatique s'est généralisé dans tous les secteurs d'activité. Le secteur de la monétique, qui connait une très forte évolution de son périmètre, de ses applications et de ses usages, s'accompagne de vulnérabilités qui n'existaient pas avec le paiement de proximité. Les paiements électroniques sont caractérisés par trois éléments constitutifs :
+
+\begin{itemize}[leftmargin=*]
+\item Un élément technique, consistant à l'utilisation des procédés informatiques, magnétiques, électroniques et télématiques au lieu du papier,
+\item Un élément monétique, à savoir la circulation de la monnaie d'un compte à un autre de manière instantanée,
+\item Un élément organique, impliquant l'intervention des banques, du commerce et consommateurs pour la mise en \oe uvre des paiements électroniques.
+\end{itemize}
+
+Dans la partie présentation de la société, nous avons vu que HPS apporte des solutions logicielles standards PowerCARD qui assurent la sécurité et la fiabilité dans le processus de la monétique. Etant donné que l'entreprise commercialise ses solutions à l'international, les clients demandent une adaptation (modification) de la solution en termes de fonctionnalités par rapport à leurs besoins spécifiques.
+
+HPS s'occupe plusieurs projets de même client (banque internationale) notamment dans des zones géographiques différents, ces projets partagent des parties de code commun. Donc on est dans l'obligation de maîtriser les impacts qui pouvant résulter des changements associés aux évolutions et corrections de code entre chaque projet. Il est devenu indispensable de réaliser des campagnes de test automatisé qui détectent les futures régressions.
+
+Mon projet s'inscrit dans ce contexte critique d'Assurance Qualité (QA). Bien que les étapes de test manuel soient maîtrisées et exécutées normalement, la charge de travail répétitive qu'elles imposent pousse vers l'automatisation. Cependant, l'automatisation classique avec des outils comme Cypress exige des compétences avancées en programmation Javascript, créant un goulet d'étranglement pour les testeurs fonctionnels. C'est ici qu'intervient la véritable valeur ajoutée de ce projet : concevoir et développer une solution innovante, le « QA Cypress Generator Dashboard », visant à automatiser le processus de création des tests automatisés eux-mêmes, sans écrire une seule ligne de code.
+
+\section{Missions et objectifs}
+
+Les missions et objectifs de mon stage sont comme suit :
+
+\begin{itemize}[leftmargin=*]
+\item Identification et capture des exigences client, fonctionnelles, techniques et standards,
+\item Préparation du plan de tests,
+\item Identification et conception des cas de tests,
+\item Préparation des jeux de données des tests,
+\item Implémentation des cas de tests step-to-step,
+\item Assurance de la couverture totale des exigences,
+\item Préparation et exécution des campagnes de tests,
+\item Automatisation des cas de test.
+\end{itemize}
+
+Certes, un projet de stage est susceptible de changement en fonction des imprévus, délais et résultats attendus. La phase de réalisation représente l'aboutissement des objectifs décrits et fixés auparavant. Elle doit être bien planifiée en fonction des tâches à effectuer et des temps alloués.
+
+\section{Cahier de charges}
+
+Pour effectuer un stage de PFE, il faut bien entendu une entreprise, un stagiaire, une mission, un délai, un encadrement ainsi que des besoins légitimes pour la réalisation de ce projet.
+
+\begin{table}[H]
+\centering
+\caption{Cahier de charges du stage}
+\begin{tabularx}{0.9\textwidth}{l X}
+\toprule
+\textbf{Rubrique} & \textbf{Détails} \\
+\midrule
+Entreprise & HPS \\
+Adresse & Casablanca Nearshore, Shore 3 - Sector A \\
+Contact & Fax 05290-45000 \\
+Stagiaire & Mohamed KARKACHI, Ingénieure d'état en informatique et réseaux \\
+Durée & De 01 Mars Au 31 Aout. 2022 \\
+Encadrement & Mme. Salima MISSOUR, HPS / Mr. Ali IDMANSOUR, (Université EMSI) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Pour la réalisation de ce projet, il est normal de mettre à la disposition du stagiaire un ensemble de moyens matériel, logiciels et financiers.
+
+\begin{itemize}[leftmargin=*]
+\item[$\checkmark$] \textbf{Moyens matériels} : Un PC portable et un écran supplémentaire configuré ``entreprise'' qui permet un certain nombre de privilèges de manipulation, d'accéder aux logiciels, outils et bases de données requises, \ldots
+\item[$\checkmark$] \textbf{Moyens logiciels} : Des outils de travail de la société, accompagnés d'une formation et documentation, sont nécessaires pour la réalisation du projet de Fin d'études.
+\item[$\checkmark$] \textbf{Moyens financiers} : Des gratifications mensuelles qui permettent au stagiaire de supporter les frais de logement, transport, restauration, ...
+\end{itemize}
+
+\section{Planning global du stage}
+
+Afin de réaliser ma mission, il fallait de suivre une suite de formation sur les bases de la chaîne monétique et les outils de tests utilisés par l'entreprise, analyser les cahiers spécification du chaque composant, faire la conception des tests, élaborer un scénario de test, l'exécution manuellement de ce scénario puis l'automatisation.
+
+Tout au long de cette période de stage, j'avais trois réunions par semaine avec mon équipe pour discuter de mon avancement et les difficultés rencontrées. La figure ci-dessous représente le diagramme de GANTT de mon projet, en illustrant les différentes tâches réalisées.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{page18_img02.png}
+\caption{Diagramme de Gantt}
+\end{figure}
+
+\section{Gestion du projet}
+
+\subsection{Description}
+
+Le client utilisera les solutions standards PowerCARD suivantes :
+\begin{itemize}[leftmargin=*]
+\item PowerCARD Issuer,
+\item PowerCARD switch.
+\end{itemize}
+
+Mon projet de stage concernera les tests menés sur les changements effectués au niveau la solution PowerCARD Issuer.
+
+\subsection{Organisation de projets}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{page19_img02.png}
+\caption{Décomposition de projets}
+\end{figure}
+
+\subsection{Livrables projet}
+
+\begin{table}[H]
+\centering\footnotesize
+\caption{Livrables projet}
+\begin{tabularx}{\textwidth}{l X X X}
+\toprule
+\textbf{Livrables} & \textbf{Données d'entrée} & \textbf{Étapes} & \textbf{Données de sortie} \\
+\midrule
+Définition des exigences & Documents de spécifications BSD, BRD et TSF, planning de projet. & Révision et analyse des documents, Saisie des exigences sous l'outil, Définition des criticités et priorités & Gestion des exigences \\
+\midrule
+Conception des tests & Documents de spécifications. & Identification des conditions de test, Conception et rédaction des cas de test, Préparation des jeux de données & Cas de test, Plan de test, Campagne de test \\
+\midrule
+Exécution des tests & Documents de spécifications, Scénarios de test, Cas de test, Campagne de test & Exécution des campagnes, Enregistrement des résultats, Comparaison des résultats & Fiches d'anomalies, Rapport de synthèse de test \\
+\midrule
+Automatisation des tests & Jeux de données, Scripts d'automatisation & Identification des objectifs, Analyse de faisabilité, Configuration de l'environnement & Résultats des tests automatisés \\
+\midrule
+Suivi du déroulement des tests & Données d'anomalies, Données de couverture, Preuves de test & Mesure et analyse des résultats, Suivi du progrès & Leçons retenues, Améliorations \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\vspace{10pt}
+\textbf{Conclusion}
+
+La définition claire du contexte, des objectifs et des livrables a permis d'établir une feuille de route solide pour la réalisation de ce projet. La transition vers une automatisation accrue des tests répond directement à la problématique de fiabilité et de gain de temps identifiée par HPS. Afin de concrétiser ces objectifs, il est indispensable de s'appuyer sur des bases méthodologiques reconnues et des outils performants. Le chapitre suivant exposera le cadre théorique du cycle de développement logiciel et les méthodologies de test adoptées pour structurer techniquement notre démarche.

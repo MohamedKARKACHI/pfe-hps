@@ -1,0 +1,252 @@
+% ══════════════════════════════════════════════════════════════════
+% CHAPITRE III — Méthodologies et outils
+% ══════════════════════════════════════════════════════════════════
+\newpage
+\chapter{Méthodologies et outils}
+\vspace{1cm}
+\minitoc
+\newpage
+
+\textit{Ce chapitre se propose de donner un aperçu sur les tests logiciel ; les méthodologies suivies pour la réalisation du projet ; les étapes des tests effectuées, depuis les exigences jusqu'à l'automatisation, ainsi que les technologies innovantes intégrées (IA et orchestration de workflows).}
+
+\vspace{10pt}
+\textbf{Introduction}
+
+La réussite d'un projet d'automatisation des tests repose fondamentalement sur la rigueur des méthodes employées et l'adéquation des outils choisis. Ce chapitre aborde les concepts théoriques sous-jacents à notre travail, en mettant l'accent sur le cycle de développement logiciel en V itératif, particulièrement adapté aux exigences de traçabilité du secteur bancaire. Nous détaillerons également les différentes phases du processus de test, allant de la gestion des exigences à l'exécution et au suivi des anomalies. Enfin, nous présenterons les technologies innovantes intégrées dans notre solution : l'intelligence artificielle (Mistral AI) pour la découverte automatique d'écrans et la génération de tests, ainsi que l'outil d'orchestration n8n pour l'automatisation des workflows de préparation de données.
+\vspace{10pt}
+
+Un cycle de vie d'un projet informatique est le descriptif du processus à suivre pour mener à bien le projet. Le processus décrit les phases à réaliser pour atteindre les objectifs fixés. Le processus de test au sein des projets PowerCARD adopte un cycle itératif.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{page22_img02.jpeg}
+\caption{Cycle en V}
+\end{figure}
+
+Le problème avec le cycle en V est sa rigidité. Afin d'adopter cette souplesse, le projet sur lequel on travaille a opté pour un cycle en V itératif.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{page23_img02.jpeg}
+\caption{Exemple de cycle en V itératif d'un Sprint de 3 documents de spécifications}
+\end{figure}
+
+\section{Périmètre et méthodes}
+
+Un test est un ensemble de cas à tester. En général, le test logiciel est un procédé de validation et de vérification permettant de s'assurer que le produit est conforme à ses spécifications.
+
+Les niveaux de test identifiés pour le projet sont :
+\begin{itemize}[leftmargin=*]
+\item \textbf{Tests systèmes}, qui permettent de traiter le comportement d'un système/logiciel complet.
+\item \textbf{Tests de non-régression}, qui permettent de valider qu'une mise à jour d'un module du logiciel n'a pas provoqué un problème dans un module qui n'a pas été modifié.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{page24_img02.png}
+\caption{Méthodologie de test}
+\end{figure}
+
+\section{Tests manuels et automatisés}
+
+\subsection{Tests manuels}
+
+Un test manuel est un test exécuté par un testeur. Il est effectué dès la réception des livrables. Il permet d'exécuter manuellement les tests.
+
+\subsection{Tests automatisés}
+
+Un test automatisé est un test dont l'exécution ne nécessite pas l'intervention d'un testeur. L'exécution des tests automatisés requiert donc l'utilisation de solutions informatiques.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{page26_img02.jpeg}
+\caption{Coût des tests manuels par rapport aux tests automatisés}
+\end{figure}
+
+\section{Etapes du projet}
+
+\subsection{Gestion des exigences}
+
+Une exigence représente l'expression de ce qui doit être implémenté dans une application. Une bonne exigence doit être : Abstraite, Non ambiguë, Traçable, Testable.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{page27_img02.png}
+\caption{Elaboration du document de spécifications}
+\end{figure}
+
+\subsection{Conception des tests}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{page28_img02.png}
+\caption{Organisation des tests dans les projets PowerCARD}
+\end{figure}
+
+\subsection{Exécution des tests}
+
+Les intervenants sur cette phase auront pour charge de « dérouler » les cas de test dans l'ordre défini (campagne de test), puis, vérifier les résultats.
+
+\subsection{Gestion des anomalies}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{page31_img02.png}
+\caption{Cycle de vie d'une anomalie}
+\end{figure}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Submit} : représente une anomalie nouvellement créée,
+\item \textbf{Assign} : anomalie assignée à la personne qui s'occupera de sa correction,
+\item \textbf{Reject} : anomalie rejetée (redondance, non reproductible, etc.),
+\item \textbf{Open} : anomalie en cours de traitement/correction,
+\item \textbf{Resolve} : anomalie corrigée,
+\item \textbf{Ready-to-deliver} : anomalie prête à être livrée,
+\item \textbf{Ready-to-test} : anomalie prête à être re-testée,
+\item \textbf{Validate} : approbation et validation de la correction,
+\item \textbf{Re-assign} : anomalie réassignée car non corrigée correctement,
+\item \textbf{Close} : anomalie fermée, corrigée et validée.
+\end{itemize}
+
+\subsection{Automatisation des tests}
+
+Les tests fonctionnels manuels suivent un processus normal et maîtrisé (conception, exécution, suivi). Cependant, pour éviter la régression lors des livraisons continues, ils doivent être exécutés très régulièrement. C'est ici que la différence se fait : l'automatisation devient obligatoire. Mais coder des scripts E2E complexes en Cypress prend du temps et demande un profil technique de développeur.
+
+\textbf{La Solution : QA Cypress Dashboard}
+
+Pour combler le fossé entre les testeurs fonctionnels et l'automatisation technique, la solution développée durant ce stage est le \textbf{Cypress Generator Dashboard}. Ce portail Web interactif permet aux testeurs de naviguer visuellement dans les modules de PowerCARD, de renseigner les données via des formulaires, et de laisser le système générer instantanément et de façon autonome les scripts Cypress (.cy.js) et les jeux de données JSON. Le Dashboard est donc la solution d'automatisation ultime développée pour résoudre la problématique de la barrière technique.
+
+\subsection{Suivi du déroulement des tests}
+
+Cette activité se déroule tout au long de l'étape d'exécution de la recette fonctionnelle.
+
+% ══════════════════════════════════════════════════════════════════
+% SECTION: Intelligence Artificielle dans le Testing
+% ══════════════════════════════════════════════════════════════════
+\section{Intelligence Artificielle dans le Testing}
+
+L'intégration de l'intelligence artificielle dans le processus de test représente une avancée majeure. Dans notre projet, nous utilisons \textbf{Mistral AI}, un modèle de langage de grande taille (LLM), pour automatiser deux tâches critiques :
+
+\subsection{Découverte automatique d'écrans (AI Discovery)}
+
+Le processus de découverte automatique fonctionne en trois étapes :
+
+\begin{enumerate}
+\item \textbf{Crawling Cypress} : Un script Cypress parcourt automatiquement tous les modules de PowerCARD (Acquirer, System, Issuer, Switch, Fraud, xPOS). Pour chaque écran, il extrait les champs de formulaire (inputs, selects, textareas), les boutons, et les métadonnées de l'interface.
+
+\item \textbf{Analyse IA (Mistral)} : Les schémas bruts extraits sont envoyés à l'API Mistral qui les analyse pour :
+\begin{itemize}[leftmargin=*]
+\item Classifier chaque écran dans le bon module et workspace,
+\item Générer des labels lisibles (ex: \texttt{switch-merchant-onboarding} → ``Switch - Merchant Onboarding''),
+\item Identifier le type d'écran (CRUD, recherche, configuration),
+\item Suggérer la meilleure stratégie de sélecteur Cypress pour chaque champ.
+\end{itemize}
+
+\item \textbf{Enrichissement du catalogue} : Les écrans enrichis sont fusionnés avec le catalogue existant (\texttt{projectCatalog.json}), créant un référentiel complet et à jour.
+\end{enumerate}
+
+\subsection{Génération de tests par IA}
+
+Le service \texttt{generator-service} (port 8002) expose deux endpoints d'IA :
+
+\begin{itemize}[leftmargin=*]
+\item \texttt{POST /api/generate-ai-test} : Génère un script Cypress complet pour un écran donné, en injectant le contexte du projet (Page Objects, Custom Commands, conventions).
+\item \texttt{POST /api/generate-ai-flow} : Génère un test multi-étapes pour un flux fonctionnel complet (ex: cycle de vie terminal, onboarding marchand).
+\end{itemize}
+
+Le modèle utilisé est \textbf{mistral-large-latest} avec une température basse (0.1) pour garantir la cohérence et la reproductibilité du code généré.
+
+% ══════════════════════════════════════════════════════════════════
+% SECTION: Orchestration avec n8n
+% ══════════════════════════════════════════════════════════════════
+\section{Orchestration avec n8n}
+
+\textbf{n8n} est un outil d'automatisation de workflows open-source qui permet de créer des chaînes de traitement de données via une interface visuelle ``no-code''. Dans notre projet, n8n est utilisé pour orchestrer les tâches de préparation de données et d'archivage.
+
+\subsection{Workflow de préparation des données}
+
+Le workflow ``Automated Data Prep \& DB Archiving'' implémente le flux suivant :
+
+\begin{enumerate}
+\item \textbf{Trigger} : Déclenchement manuel ou planifié.
+\item \textbf{Génération de carte de test} : Appel à l'endpoint \texttt{GET /api/connect/random-test-card} pour récupérer une carte de test valide depuis l'API PowerCard Connect.
+\item \textbf{Création de la table} : Vérification et création de la table \texttt{generated\_test\_cards} dans SQLite si elle n'existe pas.
+\item \textbf{Insertion} : Stockage du numéro de carte et du type dans la base de données avec horodatage automatique.
+\item \textbf{Vérification} : Requête de vérification pour confirmer l'insertion (5 dernières entrées).
+\end{enumerate}
+
+\subsection{Avantages de l'approche n8n}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Visuel et accessible} : Les testeurs QA peuvent créer et modifier des workflows sans coder.
+\item \textbf{Extensible} : Plus de 400 nœuds natifs pour intégrer d'autres outils (Jira, Slack, email).
+\item \textbf{Planifiable} : Exécution automatique via des déclencheurs temporels (cron).
+\item \textbf{Reproductible} : Les workflows sont exportés en JSON et versionnés dans le dépôt Git.
+\end{itemize}
+
+
+% ══════════════════════════════════════════════════════════════════
+% SECTION: Environnement technologique et outils
+% ══════════════════════════════════════════════════════════════════
+\section{Environnement technologique et outils}
+
+Pour mener à bien les différentes phases de ce projet, de la conception des tests jusqu'au développement de la solution d'automatisation finale, un ensemble d'outils performants et de technologies modernes a été déployé.
+
+\subsection{Outils d'Automatisation et de Tests API}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Cypress} : Framework de test de bout en bout moderne utilisé pour l'automatisation des tests fonctionnels de l'interface utilisateur de PowerCARD. Il permet une exécution rapide et offre un rapport visuel détaillé.
+\item \textbf{Postman} : Outil de collaboration pour le développement d'API, utilisé pour interagir avec les endpoints de PowerCARD (comme Connect API), comprendre les requêtes et préparer les jeux de données.
+\item \textbf{Newman} : L'outil en ligne de commande de Postman, indispensable pour exécuter et automatiser les collections Postman directement depuis le terminal.
+\end{itemize}
+
+\subsection{Outils de Développement du Dashboard}
+\begin{itemize}[leftmargin=*]
+\item \textbf{React 18.3 \& Vite 5.4} : Bibliothèques et outils de build utilisés pour créer une interface utilisateur rapide, réactive et ergonomique pour le Dashboard.
+\item \textbf{Node.js 22 LTS} : Utilisé côté serveur pour créer les microservices du Dashboard, interagir avec le système de fichiers et servir de proxy sécurisé.
+\item \textbf{Monaco Editor} : L'éditeur de code de VS Code, intégré dans le Dashboard pour la visualisation et l'édition du code généré avec coloration syntaxique.
+\item \textbf{SQLite} : Base de données locale légère utilisée par l'équipe QA pour gérer les configurations et les cartes de test.
+\end{itemize}
+
+\subsection{Intelligence Artificielle et Orchestration}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Mistral AI} : Modèle de langage utilisé pour la découverte automatique d'écrans et la génération de scripts de test. Modèle \texttt{mistral-large-latest} via API REST.
+\item \textbf{n8n} : Outil d'automatisation de workflows open-source pour l'orchestration des tâches de préparation de données et d'archivage dans la base SQLite.
+\end{itemize}
+
+\subsection{Infrastructure et DevOps}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Docker \& Docker Compose} : Containerisation de l'ensemble des microservices avec orchestration des dépendances et health checks automatiques.
+\item \textbf{Git \& GitHub} : Plateforme de contrôle de version pour la gestion du code source de l'ensemble du projet.
+\end{itemize}
+
+\subsection{Collaboration et Gestion de Projet}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Jira} : Utilisé pour le suivi des anomalies (Bug Tracking) et la gestion des tâches au sein de l'équipe QA.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Stack technologique complète du projet}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Composant} & \textbf{Technologie} & \textbf{Version / Détail} \\
+\midrule
+\rowcolor{primary!5} Frontend & React + Vite & 18.3 / 5.4 \\
+Code Editor & Monaco Editor & Dernière version \\
+\rowcolor{primary!5} Microservices & Node.js (raw \texttt{http}) & 22 LTS \\
+Test Framework & Cypress & 15.13.1 \\
+\rowcolor{primary!5} IA & Mistral AI API & mistral-large-latest \\
+Orchestration & n8n & Dernière version \\
+\rowcolor{primary!5} Base de données & SQLite & 3.x \\
+Containerisation & Docker + Compose V2 & node:22-alpine \\
+\rowcolor{primary!5} Logging & JSON structuré (stdout) & Interne \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+\vspace{10pt}
+\textbf{Conclusion}
+
+La maîtrise des cycles de test et l'utilisation de méthodologies structurées assurent une validation exhaustive des solutions logicielles. L'automatisation, en particulier, s'impose comme une nécessité pour fiabiliser les processus de non-régression tout en optimisant les coûts et les délais. L'intégration de l'intelligence artificielle (Mistral AI) et de l'orchestration de workflows (n8n) positionne notre solution comme un outil de nouvelle génération dans le domaine de l'assurance qualité. Forts de cette base méthodologique et technologique, nous avons pu passer à la phase de concrétisation. Le chapitre suivant présentera en détail les travaux techniques réalisés durant ce stage, incluant l'automatisation effective des scénarios de test ainsi que la conception et la démonstration du Dashboard.
