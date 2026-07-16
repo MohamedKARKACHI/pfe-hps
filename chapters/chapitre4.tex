@@ -153,7 +153,7 @@ Les différents acteurs et les fonctionnalités offertes par le système.
 \begin{tikzpicture}[node distance=1cm and 2cm]
   \node[user] (tester) {Testeur QA};
 
-  \node[spa, right=3cm of tester, yshift=2cm] (uc1) {UC1: Sélectionner un écran};
+  \node[spa, right=4.5cm of tester, yshift=2cm] (uc1) {UC1: Sélectionner un écran};
   \node[spa, below=0.5cm of uc1] (uc2) {UC2: Remplir le formulaire};
   \node[spa, below=0.5cm of uc2] (uc3) {UC3: Auto-Fill API};
   \node[spa, below=0.5cm of uc3] (uc4) {UC4: Charger cas prédéfini};
@@ -169,7 +169,7 @@ Les différents acteurs et les fonctionnalités offertes par le système.
   \node[svc, fill=orangeC!10, draw=orangeC!80, below=0.5cm of uc12] (uc13) {UC13: Inférer templates};
   \node[svc, fill=orangeC!10, draw=orangeC!80, below=0.5cm of uc13] (uc14) {UC14: Générer catalogue};
 
-  \node[user, fill=orangeC!20, draw=orangeC!80!black, left=3cm of uc13] (admin) {Admin};
+  \node[user, fill=orangeC!20, draw=orangeC!80!black, left=4.5cm of uc13] (admin) {Admin};
 
   \begin{scope}[on background layer]
     \node[bxBlue, fit=(uc1)(uc14), label={[lB]above:QA Cypress Dashboard}] {};
@@ -180,9 +180,9 @@ Les différents acteurs et les fonctionnalités offertes par le système.
   \foreach \uc in {uc12,uc13,uc14}
     \draw[arw, color=orangeC] (admin.east) |- (\uc.west);
 
-  \draw[darw, color=purpleC] (uc5.east) -- ++(1,0) |- node[lbl, near start]{\scriptsize\guillemotleft include\guillemotright} (uc2.east);
-  \draw[darw, color=purpleC] (uc8.east) -- ++(1.5,0) |- node[lbl, near start]{\scriptsize\guillemotleft include\guillemotright} (uc5.east);
-  \draw[darw, color=purpleC] (uc9.east) -- ++(2,0) |- node[lbl, near start]{\scriptsize\guillemotleft include\guillemotright} (uc8.east);
+  \draw[darw, color=purpleC] (uc5.east) -- ++(1.5,0) |- node[lbl, near start]{\scriptsize\guillemotleft include\guillemotright} (uc2.east);
+  \draw[darw, color=purpleC] (uc8.east) -- ++(2.5,0) |- node[lbl, near start]{\scriptsize\guillemotleft include\guillemotright} (uc5.east);
+  \draw[darw, color=purpleC] (uc9.east) -- ++(3.5,0) |- node[lbl, near start]{\scriptsize\guillemotleft include\guillemotright} (uc8.east);
 \end{tikzpicture}
 }%
 \caption{Diagramme de Cas d'Utilisation du Dashboard}
