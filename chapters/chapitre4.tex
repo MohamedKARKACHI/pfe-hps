@@ -152,7 +152,6 @@ Les différents acteurs et les fonctionnalités offertes par le système.
 \resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[node distance=1cm and 2cm]
   \node[user] (tester) {Testeur QA};
-  \node[user, fill=orangeC!20, draw=orangeC!80!black, below=10cm of tester] (admin) {Admin};
 
   \node[spa, right=3cm of tester, yshift=2cm] (uc1) {UC1: Sélectionner un écran};
   \node[spa, below=0.5cm of uc1] (uc2) {UC2: Remplir le formulaire};
@@ -166,12 +165,14 @@ Les différents acteurs et les fonctionnalités offertes par le système.
   \node[spa, below=0.5cm of uc9] (uc10) {UC10: Voir rapport visuel};
   \node[spa, below=0.5cm of uc10] (uc11) {UC11: Ouvrir page PowerCard};
 
-  \node[svc, fill=orangeC!10, draw=orangeC!80, right=3cm of admin, yshift=1cm] (uc12) {UC12: Scanner specs};
+  \node[svc, fill=orangeC!10, draw=orangeC!80, below=0.5cm of uc11] (uc12) {UC12: Scanner specs};
   \node[svc, fill=orangeC!10, draw=orangeC!80, below=0.5cm of uc12] (uc13) {UC13: Inférer templates};
   \node[svc, fill=orangeC!10, draw=orangeC!80, below=0.5cm of uc13] (uc14) {UC14: Générer catalogue};
 
+  \node[user, fill=orangeC!20, draw=orangeC!80!black, left=3cm of uc13] (admin) {Admin};
+
   \begin{scope}[on background layer]
-    \node[bxBlue, fit=(uc1)(uc11)(uc12)(uc14), label={[lB]above:QA Cypress Dashboard}] {};
+    \node[bxBlue, fit=(uc1)(uc14), label={[lB]above:QA Cypress Dashboard}] {};
   \end{scope}
 
   \foreach \uc in {uc1,uc2,uc3,uc4,uc5,uc6,uc7,uc8,uc9,uc10,uc11}
