@@ -137,7 +137,7 @@ Le processus de découverte automatique fonctionne en trois étapes :
 \item \textbf{Analyse IA (Mistral)} : Les schémas bruts extraits sont envoyés à l'API Mistral qui les analyse pour :
 \begin{itemize}[leftmargin=*]
 \item Classifier chaque écran dans le bon module et workspace,
-\item Générer des labels lisibles (ex: \texttt{switch-merchant-onboarding} → ``Switch - Merchant Onboarding''),
+\item Générer des labels lisibles (ex: \texttt{switch-merchant-onboarding} $\rightarrow$ ``Switch - Merchant Onboarding''),
 \item Identifier le type d'écran (CRUD, recherche, configuration),
 \item Suggérer la meilleure stratégie de sélecteur Cypress pour chaque champ.
 \end{itemize}
@@ -179,7 +179,7 @@ Le workflow ``Automated Data Prep \& DB Archiving'' implémente le flux suivant 
 
 \begin{itemize}[leftmargin=*]
 \item \textbf{Visuel et accessible} : Les testeurs QA peuvent créer et modifier des workflows sans coder.
-\item \textbf{Extensible} : Plus de 400 nœuds natifs pour intégrer d'autres outils (Jira, Slack, email).
+\item \textbf{Extensible} : Plus de 400 n\oe{}uds natifs pour intégrer d'autres outils (Jira, Slack, email).
 \item \textbf{Planifiable} : Exécution automatique via des déclencheurs temporels (cron).
 \item \textbf{Reproductible} : Les workflows sont exportés en JSON et versionnés dans le dépôt Git.
 \end{itemize}

@@ -12,7 +12,7 @@
 \vspace{10pt}
 \textbf{Introduction}
 
-Ce chapitre constitue le cœur technique du projet et s'articule autour de la mise en pratique de l'automatisation des tests fonctionnels de bout en bout (E2E). Dans une première partie, nous détaillerons la conception, l'architecture et le développement d'un outil interne innovant : le « Cypress Generator Dashboard ». Cet outil, conçu avec l'écosystème React et Node.js, répond au besoin critique d'abstraire la complexité d'écriture du code Cypress, offrant ainsi à l'équipe qualité une interface intuitive pour auto-générer, configurer et exécuter les campagnes de tests automatisées avec une efficacité décuplée. Dans une seconde partie, nous présenterons un rapport d'exécution technique illustrant l'automatisation de flux métiers complexes sur le système PowerCARD.
+Ce chapitre constitue le c\oe{}ur technique du projet et s'articule autour de la mise en pratique de l'automatisation des tests fonctionnels de bout en bout (E2E). Dans une première partie, nous détaillerons la conception, l'architecture et le développement d'un outil interne innovant : le « Cypress Generator Dashboard ». Cet outil, conçu avec l'écosystème React et Node.js, répond au besoin critique d'abstraire la complexité d'écriture du code Cypress, offrant ainsi à l'équipe qualité une interface intuitive pour auto-générer, configurer et exécuter les campagnes de tests automatisées avec une efficacité décuplée. Dans une seconde partie, nous présenterons un rapport d'exécution technique illustrant l'automatisation de flux métiers complexes sur le système PowerCARD.
 
 
 % ══════════════════════════════════════════════════════════════════
@@ -276,7 +276,7 @@ Ce diagramme de séquence détaille le flux complet en quatre phases. La \textit
   \node[rectangle, rounded corners=2pt, draw=grayC, fill=graylight, inner sep=3pt] at ([yshift=-4cm]$(runner2.south)!0.5!(cypress2.south)$) {\footnotesize\textbf{Boucle SSE}};
   \draw[arw, orangeC] ([yshift=-4.8cm]cypress2.south) -- node[lbl, above]{4. stdout/stderr} ([yshift=-4.8cm]runner2.south);
   \draw[arw, accent] ([yshift=-5.4cm]runner2.south) -- node[lbl, above]{5. event: data (SSE)} ([yshift=-5.4cm]dash2.south);
-  \draw[arw, blueC, dotted] ([yshift=-6cm]dash2.south) -- ++(0,-0.5) node[lbl, right]{\footnotesize parseCypressLogs() → rapport visuel};
+  \draw[arw, blueC, dotted] ([yshift=-6cm]dash2.south) -- ++(0,-0.5) node[lbl, right]{\footnotesize parseCypressLogs() $\rightarrow$ rapport visuel};
 
   % ── End ──
   \draw[arw, orangeC, dashed] ([yshift=-7.5cm]cypress2.south) -- node[lbl, above]{6. exit code} ([yshift=-7.5cm]runner2.south);
@@ -939,8 +939,8 @@ cy.waitBusy()
 
 \textbf{Étapes :}
 \begin{enumerate}[leftmargin=1.5em]
-    \item Écran d'intégration du marchand → Nouveau → Remplir tous les champs → Enregistrer.
-    \item Retour → Rechercher l'enregistrement → Double-cliquer → Aller à Localisation.
+    \item Écran d'intégration du marchand $\rightarrow$ Nouveau $\rightarrow$ Remplir tous les champs $\rightarrow$ Enregistrer.
+    \item Retour $\rightarrow$ Rechercher l'enregistrement $\rightarrow$ Double-cliquer $\rightarrow$ Aller à Localisation.
 \end{enumerate}
 
 \bugtable{Le champ \textbf{Ville} ne doit pas être vide.}
