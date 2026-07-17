@@ -224,9 +224,9 @@ UC14 --- Générer catalogue & Admin & Produire projectCatalog.json \\
 \begin{tikzpicture}
   \node[spa, minimum width=2.5cm] (user) {\textbf{Testeur QA}};
   \node[svc, fill=greenC!10, draw=greenC!80!black, minimum width=2.5cm, right=2.5cm of user] (dash) {\textbf{Dashboard}};
-  \node[svc, minimum width=2.5cm, right=2.5cm of dash] (api) {\textbf{API Server}};
+  \node[svc, minimum width=2.5cm, right=2.5cm of dash] (api) {\textbf{Serveur API}};
   \node[svc, fill=orangeC!10, draw=orangeC!80!black, minimum width=2.5cm, right=2.5cm of api] (connect) {\textbf{Connect API}};
-  \node[db, minimum width=2.5cm, right=2.5cm of connect] (fs) {\textbf{File System}};
+  \node[db, minimum width=2.5cm, right=2.5cm of connect] (fs) {\textbf{Système de Fichiers}};
 
   \foreach \n in {user,dash,api,connect,fs}
     \draw[dashed, thick, gray!50] (\n.south) -- ++(0,-14.5);
@@ -237,10 +237,10 @@ UC14 --- Générer catalogue & Admin & Produire projectCatalog.json \\
   \draw[arw, accent, dashed] ([yshift=-2.8cm]api.south) -- node[lbl, above]{3. template + cas prédéfinis} ([yshift=-2.8cm]dash.south);
 
   \node[snote, below=4cm of dash] (p2) {\textbf{Phase 2: Auto-Fill}};
-  \draw[arw, blueC] ([yshift=-4.5cm]user.south) -- node[lbl, above]{4. Clic Auto-Fill} ([yshift=-4.5cm]dash.south);
+  \draw[arw, blueC] ([yshift=-4.5cm]user.south) -- node[lbl, above]{4. Clic Remplissage Auto} ([yshift=-4.5cm]dash.south);
   \draw[arw, accent] ([yshift=-5.2cm]dash.south) -- node[lbl, above]{5. GET /api/connect/random-test-card} ([yshift=-5.2cm]api.south);
   \draw[arw, orangeC] ([yshift=-5.8cm]api.south) -- node[lbl, above]{6. Auth JWT + search\_card} ([yshift=-5.8cm]connect.south);
-  \draw[arw, orangeC, dashed] ([yshift=-6.4cm]connect.south) -- node[lbl, above]{7. cardNumber, expDate} ([yshift=-6.4cm]api.south);
+  \draw[arw, orangeC, dashed] ([yshift=-6.4cm]connect.south) -- node[lbl, above]{6. Réponse API} ([yshift=-6.4cm]api.south);
   \draw[arw, accent, dashed] ([yshift=-7cm]api.south) -- node[lbl, above]{8. données carte} ([yshift=-7cm]dash.south);
 
   \node[snote, below=8cm of dash] (p3) {\textbf{Phase 3: Génération}};
@@ -252,7 +252,7 @@ UC14 --- Générer catalogue & Admin & Produire projectCatalog.json \\
   \draw[arw, accent] ([yshift=-12.2cm]dash.south) -- node[lbl, above]{11. POST /api/export-to-project} ([yshift=-12.2cm]api.south);
   \draw[arw, purpleC] ([yshift=-12.8cm]api.south) -- node[lbl, above]{12. writeFileSync()} ([yshift=-12.8cm]fs.south);
   \draw[arw, purpleC, dashed] ([yshift=-13.4cm]fs.south) -- node[lbl, above]{13. OK} ([yshift=-13.4cm]api.south);
-  \draw[arw, accent, dashed] ([yshift=-14cm]api.south) -- node[lbl, above]{14. success} ([yshift=-14cm]dash.south);
+  \draw[arw, greenC, dashed] ([yshift=-13.5cm]api.south) -- node[lbl, above]{13. Succès} ([yshift=-13.5cm]dash.south);
 \end{tikzpicture}
 }%
 \caption{Séquence 1 --- Générer et Exporter un Test}
@@ -270,24 +270,23 @@ Ce diagramme de séquence détaille le flux complet en quatre phases. La \textit
 \begin{tikzpicture}
   \node[spa, minimum width=2.5cm] (user2) {\textbf{Testeur QA}};
   \node[svc, fill=greenC!10, draw=greenC!80!black, minimum width=2.5cm, right=3cm of user2] (dash2) {\textbf{Dashboard}};
-  \node[svc, minimum width=2.5cm, right=3cm of dash2] (runner2) {\textbf{Runner Service}};
-  \node[cy, draw=orangeC!80!black, fill=orangeC!10, minimum width=2.5cm, right=3cm of runner2] (cypress2) {\textbf{Cypress Process}};
+  \node[svc, minimum width=2.5cm, right=3cm of dash2] (runner2) {\textbf{Service Exécuteur}};
+  \node[cy, draw=orangeC!80!black, fill=orangeC!10, minimum width=2.5cm, right=3cm of runner2] (cypress2) {\textbf{Processus Cypress}};
 
   \foreach \n in {user2,dash2,runner2,cypress2}
     \draw[dashed, thick, gray!50] (\n.south) -- ++(0,-10);
 
-  \draw[arw, blueC] ([yshift=-1cm]user2.south) -- node[lbl, above]{1. Clic Exécuter} ([yshift=-1cm]dash2.south);
+  \draw[arw, blueC] ([yshift=-1cm]user2.south) -- node[lbl, above]{1. Clic Exécuter Test} ([yshift=-1cm]dash2.south);
   \draw[arw, accent] ([yshift=-1.8cm]dash2.south) -- node[lbl, above]{2. GET /api/run-cypress-spec (SSE)} ([yshift=-1.8cm]runner2.south);
   \draw[arw, purpleC] ([yshift=-2.6cm]runner2.south) -- node[lbl, above]{3. spawn('npx cypress run')} ([yshift=-2.6cm]cypress2.south);
 
   \node[snote, fill=orangeC!10] at ([yshift=-4cm]$(runner2.south)!0.5!(cypress2.south)$) {\footnotesize\textbf{Boucle SSE (Server-Sent Events)}};
-  \draw[arw, orangeC] ([yshift=-4.8cm]cypress2.south) -- node[lbl, above]{4. stdout/stderr} ([yshift=-4.8cm]runner2.south);
-  \draw[arw, accent] ([yshift=-5.4cm]runner2.south) -- node[lbl, above]{5. event: data (SSE)} ([yshift=-5.4cm]dash2.south);
-  \draw[arw, blueC] ([yshift=-6cm]dash2.south) -- ++(0.5,0) |- ([yshift=-6.6cm]dash2.south) node[lbl, right, yshift=0.3cm]{\footnotesize parseCypressLogs() $\rightarrow$ rapport visuel};
+  \draw[arw, orangeC] ([yshift=-5cm]cypress2.south) -- node[lbl, above]{4. Flux stdout/stderr} ([yshift=-5cm]runner2.south);
+  \draw[arw, accent] ([yshift=-5.4cm]runner2.south) -- node[lbl, above]{5. événement: data} ([yshift=-5.4cm]dash2.south);
+  \draw[arw, blueC, dashed] ([yshift=-7cm]dash2.south) -- node[lbl, above]{6. Affichage logs temps réel} ([yshift=-7cm]user2.south);
 
-  \draw[arw, orangeC, dashed] ([yshift=-8cm]cypress2.south) -- node[lbl, above]{6. exit code} ([yshift=-8cm]runner2.south);
-  \draw[arw, accent] ([yshift=-8.6cm]runner2.south) -- node[lbl, above]{7. event: end} ([yshift=-8.6cm]dash2.south);
-  \draw[arw, accent, dashed] ([yshift=-9.2cm]dash2.south) -- node[lbl, above]{8. Résumé final} ([yshift=-9.2cm]user2.south);
+  \draw[arw, orangeC, dashed] ([yshift=-8cm]cypress2.south) -- node[lbl, above]{7. code de retour} ([yshift=-8cm]runner2.south);
+  \draw[arw, accent] ([yshift=-8.6cm]runner2.south) -- node[lbl, above]{8. événement: end} ([yshift=-8.6cm]dash2.south);
 \end{tikzpicture}
 }%
 \caption{Séquence 2 --- Exécution du Test et Rapport}
@@ -303,10 +302,10 @@ Ce diagramme modélise le flux d'exécution des tests. Le serveur instancie un p
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tikzpicture}
-  \node[svc, fill=greenC!10, draw=greenC!80!black, minimum width=2.5cm] (vite) {\textbf{Vite Dev Server}};
+  \node[svc, fill=greenC!10, draw=greenC!80!black, minimum width=2.5cm] (vite) {\textbf{Serveur de Dév Vite}};
   \node[svc, minimum width=2.5cm, right=3cm of vite] (catalog) {\textbf{catalog.mjs}};
-  \node[db, minimum width=2.5cm, right=3cm of catalog] (fsys) {\textbf{File System}};
-  \node[spa, minimum width=2.5cm, right=3cm of fsys] (output) {\textbf{JSON Output}};
+  \node[db, minimum width=2.5cm, right=3cm of catalog] (fsys) {\textbf{Système de Fichiers}};
+  \node[spa, minimum width=2.5cm, right=3cm of fsys] (output) {\textbf{Sortie JSON}};
 
   \foreach \n in {vite,catalog,fsys,output}
     \draw[dashed, thick, gray!50] (\n.south) -- ++(0,-8.5);
@@ -314,7 +313,7 @@ Ce diagramme modélise le flux d'exécution des tests. Le serveur instancie un p
   \draw[arw, accent] ([yshift=-1cm]vite.south) -- node[lbl, above]{1. npm run dev} ([yshift=-1cm]catalog.south);
   \draw[arw, purpleC] ([yshift=-2cm]catalog.south) -- node[lbl, above]{2. glob('cypress/e2e/**/*.cy.js')} ([yshift=-2cm]fsys.south);
   \draw[arw, orangeC, dashed] ([yshift=-2.8cm]fsys.south) -- node[lbl, above]{3. liste des specs} ([yshift=-2.8cm]catalog.south);
-  \draw[arw, purpleC] ([yshift=-3.8cm]catalog.south) -- node[lbl, above]{4. readFile(fixtures)} ([yshift=-3.8cm]fsys.south);
+  \draw[arw, orangeC] ([yshift=-3.5cm]catalog.south) -- node[lbl, above]{3. Analyse AST} ([yshift=-3.5cm]fsys.south);
   \draw[arw, orangeC, dashed] ([yshift=-4.6cm]fsys.south) -- node[lbl, above]{5. JSON fixtures} ([yshift=-4.6cm]catalog.south);
 
   \draw[arw, purpleC] ([yshift=-5.6cm]catalog.south) -- ++(0.5,0) |- ([yshift=-6.2cm]catalog.south) node[lbl, right, yshift=0.3cm]{\footnotesize inferTemplateFromFixture()};
@@ -484,12 +483,12 @@ Connect & \texttt{GET /api/connect/random-test-card} & REST & Proxy vers l'API P
 \resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[node distance=1.5cm and 2cm]
   \node[spa] (client) {\textbf{Dashboard React SPA}\\ \scriptsize localhost:5175};
-  \node[gw, below=2cm of client] (gw) {\textbf{API Gateway}\\ \scriptsize localhost:8000};
+  \node[gw, below=2cm of client] (gw) {\textbf{Passerelle API}\\ \scriptsize localhost:8000};
 
   \node[svc, below left=2.5cm and 3cm of gw] (ref) {\textbf{Service Référentiel}\\ \scriptsize :8001};
-  \node[svc, right=1cm of ref] (gen) {\textbf{Generator Service}\\ \scriptsize :8002};
-  \node[svc, right=1cm of gen] (run) {\textbf{Runner Service}\\ \scriptsize :8003};
-  \node[svc, right=1cm of run] (conn) {\textbf{Connect Service}\\ \scriptsize :8004};
+  \node[svc, right=1cm of ref] (gen) {\textbf{Service Générateur}\\ \scriptsize :8002};
+  \node[svc, right=1cm of gen] (run) {\textbf{Service Exécuteur}\\ \scriptsize :8003};
+  \node[svc, right=1cm of run] (conn) {\textbf{Service Connect}\\ \scriptsize :8004};
 
   \node[db, minimum width=4cm, below=2cm of $(gen)!0.5!(run)$] (storage) {\textbf{Stockage Partagé}\\ \scriptsize cypress/ (R/W)};
   \node[spa, fill=orangeC!20, draw=orangeC!80!black, below=2cm of conn] (pwc) {\textbf{PowerCard API}\\ \scriptsize Connect + App};
