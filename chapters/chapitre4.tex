@@ -95,41 +95,43 @@ Vue d'ensemble de l'architecture du système, montrant les interactions entre le
 \begin{tikzpicture}[node distance=2cm and 1cm]
 
 % Nodes
-\node[user] (user) {User / QA Engineer};
+\node[user] (user) {Utilisateur / Ingénieur QA};
 
-\node[spa, below left=1.5cm and 0.5cm of user] (react) {React Dashboard SPA\\ \scriptsize Vite :5175};
-\node[spa, fill=n8nBlue!20, draw=n8nBlue!80!black, below right=1.5cm and 0.5cm of user] (n8n) {n8n Automation Engine\\ \scriptsize Port :5678};
+\node[spa, below left=1.5cm and 0.5cm of user] (react) {Dashboard React SPA\\ \scriptsize Vite :5175};
+\node[spa, fill=n8nBlue!20, draw=n8nBlue!80!black, below right=1.5cm and 0.5cm of user] (n8n) {Moteur d'Automatisation n8n\\ \scriptsize Port :5678};
 
-\node[ai, below=1.5cm of react] (mistral) {Mistral AI Service\\ \scriptsize LLM API};
-\node[gw, below right=1.5cm and 1cm of react] (gw) {API Gateway\\ \scriptsize Port :8000};
+\node[ai, below=1.5cm of react] (mistral) {Service Mistral AI\\ \scriptsize LLM API};
+\node[gw, below right=1.5cm and 1cm of react] (gw) {Passerelle API\\ \scriptsize Port :8000};
 
-\node[svc, below left=1.5cm and 1cm of gw] (ref) {Referential Service\\ \scriptsize :8001};
-\node[svc, right=0.5cm of ref] (gen) {Generator Service\\ \scriptsize :8002};
-\node[svc, right=0.5cm of gen] (runner) {Runner Service\\ \scriptsize :8003};
-\node[svc, right=0.5cm of runner] (connect) {Connect Service\\ \scriptsize :8004};
+\node[svc, below left=1.5cm and 1cm of gw] (ref) {Service Référentiel\\ \scriptsize :8001};
+\node[svc, right=0.5cm of ref] (gen) {Service Générateur\\ \scriptsize :8002};
+\node[svc, right=0.5cm of gen] (runner) {Service Exécuteur\\ \scriptsize :8003};
+\node[svc, right=0.5cm of runner] (connect) {Service Connect\\ \scriptsize :8004};
 
 \begin{scope}[on background layer]
-    \node[rectangle, draw=yellow!60!black, fill=bgYellow, inner sep=15pt, fit=(ref)(gen)(runner)(connect), label={[font=\sffamily\bfseries\small, text=black!70]above:Microservices Grid (Backend)}] (grid) {};
+    \node[rectangle, draw=yellow!60!black, fill=bgYellow, inner sep=15pt, fit=(ref)(gen)(runner)(connect), label={[font=\sffamily\bfseries\small, text=black!70]above:Grille de Microservices (Backend)}] (grid) {};
 \end{scope}
 
-\node[db, below=1.5cm of ref] (db) {SQLite Database\\ \scriptsize qa-automation.sqlite};
-\node[cy, below right=1.5cm and -0.5cm of gen] (cypress) {Cypress Engine};
+\node[db, below=1.5cm of ref] (db) {Base de données SQLite\\ \scriptsize qa-automation.sqlite};
+\node[cy, below right=1.5cm and -0.5cm of gen] (cypress) {Moteur Cypress};
 
 % Edges
-\draw[arw] (user) -- node[lbl]{Uses UI} (user |- react.north);
-\draw[arw] (react.south) ++(-1,0) coordinate(r_ai) -- node[lbl]{AI Discovery \& Generation} (r_ai |- mistral.north);
-\draw[arw] (react.south) ++(1,0) coordinate(r_gw) -- node[lbl]{API Requests} (gw.north west);
+\draw[arw] (user) -- node[lbl]{Utilise l'UI} (user |- react.north);
+\draw[arw] (react.south) ++(-1,0) coordinate(r_ai) -- node[lbl]{Découverte \& Génération IA} (r_ai |- mistral.north);
+\draw[arw] (react.south) ++(1,0) coordinate(r_gw) -- node[lbl]{Requêtes API} (gw.north west);
 
-\draw[arw] (n8n.south) -- node[lbl]{Data Prep / Archiving} (gw.north east);
+\draw[arw] (n8n.south) -- node[lbl]{Préparation Données / Archivage} (gw.north east);
 
 \draw[arw] (gw.south west) -- node[lbl, left, xshift=-0.5cm]{\scriptsize /api/screens, /api/db} (ref.north);
 \draw[arw] (gw.south) ++(-0.5,0) coordinate(g1) -- node[lbl]{\scriptsize /api/export-to-project} (g1 |- gen.north);
 \draw[arw] (gw.south) ++(0.5,0) coordinate(g2) -- node[lbl]{\scriptsize /api/run-cypress-spec} (g2 |- runner.north);
 \draw[arw] (gw.south east) -- node[lbl]{\scriptsize /api/connect} (connect.north);
 
-\draw[arw, <->] (ref.south) -- node[lbl]{Reads/Writes SQL} (db.north);
-\draw[arw] (gen.south) -- node[lbl, left]{\scriptsize Generates .cy.js files} (cypress.north west);
-\draw[arw] (runner.south) -- node[lbl, right]{\scriptsize Spawns Test Process} (cypress.north east);
+\draw[arw, <->] (ref.south) -- node[lbl]{Lit/Écrit SQL} (db.north);
+\draw[arw] (gen.south) -- node[lbl, left]{\scriptsize Génère fichiers .cy.js} (cypress.north west);
+\draw[arw] (runner.south) -- node[lbl, right]{\scriptsize Lance Processus Test} (cypress.north east);
+
+\draw[arw, dashed, color=n8nBlue] (n8n.east) -- ++(0.5,0) |- node[lbl, near end, right]{\scriptsize Récupération \& Transformation Données} (connect.east);
 
 \end{tikzpicture}
 }%
@@ -484,7 +486,7 @@ Connect & \texttt{GET /api/connect/random-test-card} & REST & Proxy vers l'API P
   \node[spa] (client) {\textbf{Dashboard React SPA}\\ \scriptsize localhost:5175};
   \node[gw, below=2cm of client] (gw) {\textbf{API Gateway}\\ \scriptsize localhost:8000};
 
-  \node[svc, below left=2.5cm and 3cm of gw] (ref) {\textbf{Referential Service}\\ \scriptsize :8001};
+  \node[svc, below left=2.5cm and 3cm of gw] (ref) {\textbf{Service Référentiel}\\ \scriptsize :8001};
   \node[svc, right=1cm of ref] (gen) {\textbf{Generator Service}\\ \scriptsize :8002};
   \node[svc, right=1cm of gen] (run) {\textbf{Runner Service}\\ \scriptsize :8003};
   \node[svc, right=1cm of run] (conn) {\textbf{Connect Service}\\ \scriptsize :8004};
